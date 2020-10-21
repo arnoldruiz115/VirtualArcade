@@ -13,7 +13,6 @@ class Player(pygame.sprite.Sprite):
         self.player_h = 40
         self.surface = pygame.Surface((self.player_w, self.player_h))
         self.surface.fill((250, 100, 10))
-        self.center = (self.player_x, self.player_y)
         self.rect = self.surface.get_rect()
         self.rect.centerx = float(self.player_x)
         self.rect.bottom = float(self.player_y)
@@ -23,7 +22,7 @@ class Player(pygame.sprite.Sprite):
         self.moving_up = False
         self.moving_down = False
 
-    def blitme(self):
+    def draw(self):
         self.screen.blit(self.surface, self.rect)
 
     def update(self):

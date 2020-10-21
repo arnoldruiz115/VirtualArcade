@@ -1,7 +1,8 @@
 import pygame
 import sys
 
-def check_events(player):
+
+def check_events(player, machines):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
@@ -18,6 +19,8 @@ def check_events(player):
             elif event.key == pygame.K_DOWN:
                 player.moving_up = False
                 player.moving_down = True
+            elif event.key == pygame.K_g:
+                start_active_machine(player, machines)
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_RIGHT:
@@ -28,3 +31,20 @@ def check_events(player):
                 player.moving_up = False
             if event.key == pygame.K_DOWN:
                 player.moving_down = False
+
+
+def check_player_collision(player, machines):
+    collisions = pygame.sprite.spritecollide(player, machines, dokill=False)
+    if collisions:
+        for machine in collisions:
+            machine.activate()
+    if not collisions:
+        for machine in machines:
+            machine.deactivate()
+
+
+def start_active_machine(player, machines):
+    collisions = pygame.sprite.spritecollide(player, machines, dokill=False)
+    if collisions:
+        for machine in collisions:
+            machine.start_game()
