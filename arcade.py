@@ -15,9 +15,9 @@ def run_game():
     machines = pygame.sprite.Group()
 
     street_fighter_arcade = ArcadeMachine(screen)
-    street_fighter_arcade.name = "Street Fighter"
+    street_fighter_arcade.name = ""
     tetris_arcade = ArcadeMachine(screen)
-    tetris_arcade.name = "Tetris"
+    tetris_arcade.name = "atetris"
     tetris_arcade.rect.centerx = 900
     machines.add(street_fighter_arcade)
     machines.add(tetris_arcade)

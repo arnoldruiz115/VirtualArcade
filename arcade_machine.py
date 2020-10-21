@@ -1,4 +1,5 @@
 import pygame
+import subprocess
 
 
 class ArcadeMachine(pygame.sprite.Sprite):
@@ -29,3 +30,4 @@ class ArcadeMachine(pygame.sprite.Sprite):
     def start_game(self):
         if self.active:
             print("Starting {}".format(self.name))
+            subprocess.Popen([r"C:\Users\Arnold\Desktop\mame\mame64.exe", self.name])
