@@ -3,3 +3,7 @@
 /__pycache__/
 /cfg/
 /nvram/
+/images/marquee/*
+!/images/marquee/no_image.png
+/images/title/*
+!/images/title/no_image.png

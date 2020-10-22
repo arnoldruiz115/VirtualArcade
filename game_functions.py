@@ -33,14 +33,24 @@ def check_events(player, machines):
                 player.moving_down = False
 
 
-def check_player_collision(player, machines):
+def check_player_collision(screen, player, machines):
     collisions = pygame.sprite.spritecollide(player, machines, dokill=False)
     if collisions:
         for machine in collisions:
             machine.activate()
+            display_game_image(screen, machine)
     if not collisions:
         for machine in machines:
             machine.deactivate()
+
+
+def display_game_image(screen, machine):
+    if machine.get_title_image():
+        game_image = machine.get_title_image()
+        game_image_rect = game_image.get_rect()
+        game_image_rect.left = machine.rect.centerx + machine.width
+        game_image_rect.bottom = machine.pos_y
+        screen.blit(game_image, game_image_rect)
 
 
 def start_active_machine(player, machines):

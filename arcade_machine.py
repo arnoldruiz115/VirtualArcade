@@ -1,5 +1,6 @@
 import pygame
 import subprocess
+import os.path
 
 
 class ArcadeMachine(pygame.sprite.Sprite):
@@ -10,22 +11,32 @@ class ArcadeMachine(pygame.sprite.Sprite):
         self.pos_y = 400
         self.width = 50
         self.height = 80
-        self.image = pygame.image.load('images/arcade_machine_off.png')
+        self.image_on = pygame.image.load('images/arcade_machine.png').convert_alpha()
+        self.image_off = pygame.image.load('images/arcade_machine_off.png').convert_alpha()
+        self.image = self.image_off
         self.active = False
         self.rect = self.image.get_rect()
         self.rect.centerx = float(self.pos_x)
         self.rect.bottom = float(self.pos_y)
         self.name = ""
+        self.game_title_image = pygame.image.load('images/title/no_image.png').convert()
 
     def activate(self):
         if not self.active:
             self.active = True
-            self.image = pygame.image.load('images/arcade_machine.png')
+            self.image = self.image_on
 
     def deactivate(self):
         if self.active:
             self.active = False
-            self.image = pygame.image.load('images/arcade_machine_off.png')
+            self.image = self.image_off
+
+    def set_game_image(self):
+        if os.path.isfile('images/title/{}.png'.format(self.name)):
+            self.game_title_image = pygame.image.load('images/title/{}.png'.format(self.name)).convert()
+
+    def get_title_image(self):
+        return self.game_title_image
 
     def start_game(self):
         if self.active:
