@@ -2,7 +2,6 @@ import pygame
 import game_functions as gf
 from settings import Settings
 from player import Player
-from arcade_machine import ArcadeMachine
 
 
 def run_game():
@@ -15,16 +14,7 @@ def run_game():
 
     player = Player(settings, screen)
     machines = pygame.sprite.Group()
-
-    street_fighter_arcade = ArcadeMachine(screen)
-    street_fighter_arcade.name = "mshvsf"
-    street_fighter_arcade.set_game_image()
-    tetris_arcade = ArcadeMachine(screen)
-    tetris_arcade.name = "atetris"
-    tetris_arcade.set_game_image()
-    tetris_arcade.rect.centerx = 900
-    machines.add(street_fighter_arcade)
-    machines.add(tetris_arcade)
+    gf.setup_machines(screen, machines)
 
     run = True
     while run:

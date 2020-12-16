@@ -1,5 +1,21 @@
 import pygame
 import sys
+import xml.etree.ElementTree as ET
+from arcade_machine import ArcadeMachine
+
+
+def setup_machines(screen, machines):
+    root = ET.parse('romlist/exported.xml').getroot()
+    arcade_x = 100
+    for machine in root.findall("./machine"):
+        name = machine.get('name')
+        description = machine.find("description").text
+        new_machine = ArcadeMachine(screen)
+        new_machine.name = name
+        new_machine.set_game_image()
+        new_machine.rect.centerx = arcade_x
+        arcade_x += 100
+        machines.add(new_machine)
 
 
 def check_events(player, machines):
@@ -48,8 +64,8 @@ def display_game_image(screen, machine):
     if machine.get_title_image():
         game_image = machine.get_title_image()
         game_image_rect = game_image.get_rect()
-        game_image_rect.left = machine.rect.centerx + machine.width
-        game_image_rect.bottom = machine.pos_y
+        game_image_rect.centerx = screen.get_width() - screen.get_width()/6
+        game_image_rect.centery = screen.get_height()/4
         screen.blit(game_image, game_image_rect)
 
 

@@ -8,7 +8,7 @@ class ArcadeMachine(pygame.sprite.Sprite):
         super(ArcadeMachine, self).__init__()
         self.screen = screen
         self.pos_x = 600
-        self.pos_y = 400
+        self.pos_y = 200
         self.width = 50
         self.height = 80
         self.image_on = pygame.image.load('images/arcade_machine.png').convert_alpha()

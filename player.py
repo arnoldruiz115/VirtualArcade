@@ -9,8 +9,8 @@ class Player(pygame.sprite.Sprite):
         self.speed = 3
         self.player_x = settings.screen_width / 2
         self.player_y = settings.screen_height / 2
-        self.player_w = 20
-        self.player_h = 40
+        self.player_w = 34
+        self.player_h = 50
         self.surface = pygame.Surface((self.player_w, self.player_h)).convert()
         self.surface.fill((250, 100, 10))
         self.rect = self.surface.get_rect()
