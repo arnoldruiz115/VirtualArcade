@@ -1,21 +1,26 @@
 import pygame
 import sys
+import os
 import xml.etree.ElementTree as ET
 from arcade_machine import ArcadeMachine
 
 
 def setup_machines(screen, machines):
-    root = ET.parse('romlist/exported.xml').getroot()
-    arcade_x = 100
-    for machine in root.findall("./machine"):
-        name = machine.get('name')
-        description = machine.find("description").text
-        new_machine = ArcadeMachine(screen)
-        new_machine.name = name
-        new_machine.set_game_image()
-        new_machine.rect.centerx = arcade_x
-        arcade_x += 100
-        machines.add(new_machine)
+    if os.path.isfile('romlist/exported.xml'):
+        try:
+            root = ET.parse('romlist/exported.xml').getroot()
+            arcade_x = 100
+            for machine in root.findall("./machine"):
+                name = machine.get('name')
+                description = machine.find("description").text
+                new_machine = ArcadeMachine(screen)
+                new_machine.name = name
+                new_machine.set_game_image()
+                new_machine.rect.centerx = arcade_x
+                arcade_x += 100
+                machines.add(new_machine)
+        except ET.ParseError:
+            print("Empty rom list.\nGet exported.xml from mame and place it in the rom list folder.")
 
 
 def check_events(player, machines):
